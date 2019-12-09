@@ -48,19 +48,26 @@ void single_mod(data_t * data) {
 //        cout << s << endl;
         Graph g(s);
 
-//        int m = g.m;
+        int m = g.m;
 //        int chnum = g.chromatic_num();
 //        int chind = g.chromatic_ind();
-//        int komp_sv = g.komp_sv();
-//        int treo = g.treo();
-//        pair<int,int> rd = g.rad_diam();
-//        int duo = g.duo();
+        int komp_sv = g.komp_sv();
+        int treo = g.treo();
+        pair<int,int> rd = g.rad_diam();
+        int duo = g.duo();
 //        int exponent = g.exponent();
 //        int clique = g.clique();
 //        int indep = g.indep();
 //        int local_sv = g.local_sv();
 //        int k_e_con = g.k_edge_connected();
-        int k_v_con = g.k_vertex_connected();
+//        int k_v_con = g.k_vertex_connected();
+//        vector<int> g_and_c = g.girth_and_circle();
+//        int girth = g_and_c[0];
+//        int circle = g_and_c[1];
+//        int even_girth = g_and_c[2];
+//        int odd_girth = g_and_c[3];
+
+
 
 //        cout << k_e_con << endl;
 
@@ -68,22 +75,26 @@ void single_mod(data_t * data) {
 //        data->result_chind[s] = chind;
 //
 //
-//        data->result_komp_sv[s] = komp_sv;
-//        if (komp_sv == 1)
-//            data->result_sv[s] = 1;
-//        else
-//            data->result_sv[s] = 0;
-//        data->result_treo[s] = treo;
-//        data->result_rad[s] = rd.first;
-//        data->result_diam[s] = rd.second;
-//        data->result_duo[s] = duo;
+        data->result_komp_sv[s] = komp_sv;
+        if (komp_sv == 1)
+            data->result_sv[s] = 1;
+        else
+            data->result_sv[s] = 0;
+        data->result_treo[s] = treo;
+        data->result_rad[s] = rd.first;
+        data->result_diam[s] = rd.second;
+        data->result_duo[s] = duo;
 //        data->result_exponent[s] = exponent;
 //        data->result_clique[s] = clique;
 //        data->result_indep[s] = indep;
 //        data->result_m[s] = m;
 //        data->result_local_sv[s] = local_sv;
 //        data->result_k_edge_connected[s] = k_e_con;
-        data->result_k_vertex_connected[s] = k_v_con;
+//        data->result_k_vertex_connected[s] = k_v_con;
+//        data->result_girth[s] = girth;
+//        data->result_circle[s] = circle;
+//        data->result_even_girth[s] = even_girth;
+//        data->result_odd_girth[s] = odd_girth;
 
 
     }
@@ -106,25 +117,25 @@ void run(data_t * data) {
 
 //    save_map(data->result_chnum, data->outdir + "chromatic_num" + data->vertex_count + ".txt");
 //    save_map(data->result_chind, data->outdir + "chromatic_ind" + data->vertex_count + ".txt");
-//    save_map(data->result_sv, data->outdir + "component" + data->vertex_count + ".txt");
-//    save_map(data->result_komp_sv, data->outdir + "amount_component" + data->vertex_count + ".txt");
-//    save_map(data->result_treo, data->outdir + "treo" + data->vertex_count + ".txt");
-//    save_map(data->result_rad, data->outdir + "radius" + data->vertex_count + ".txt");
-//    save_map(data->result_diam, data->outdir + "diameter" + data->vertex_count + ".txt");
-//    save_map(data->result_duo, data->outdir + "bipartite" + data->vertex_count + ".txt");
+    save_map(data->result_sv, data->outdir + "component" + data->vertex_count + ".txt");
+    save_map(data->result_komp_sv, data->outdir + "amount_component" + data->vertex_count + ".txt");
+    save_map(data->result_treo, data->outdir + "treo" + data->vertex_count + ".txt");
+    save_map(data->result_rad, data->outdir + "radius" + data->vertex_count + ".txt");
+    save_map(data->result_diam, data->outdir + "diameter" + data->vertex_count + ".txt");
+    save_map(data->result_duo, data->outdir + "bipartite" + data->vertex_count + ".txt");
 //    save_map(data->result_exponent, data->outdir + "exponent" + data->vertex_count + ".txt");
 //    save_map(data->result_clique, data->outdir + "clique" + data->vertex_count + ".txt");
 //    save_map(data->result_indep, data->outdir + "independent_num" + data->vertex_count + ".txt");
 //    save_map(data->result_m, data->outdir + "m" + data->vertex_count + ".txt");
 //    save_map(data->result_local_sv, data->outdir + "local_sv" + data->vertex_count + ".txt");
 //    save_map(data->result_k_edge_connected, data->outdir + "k_edge_connected" + data->vertex_count + ".txt");
-    save_map(data->result_k_vertex_connected, data->outdir + "k_vertex_connected" + data->vertex_count + ".txt");
+//    save_map(data->result_k_vertex_connected, data->outdir + "k_vertex_connected" + data->vertex_count + ".txt");
 
 
-//    save_map(data->map_gir, data->outdir + "gir" + data->vertex_count + ".txt");
-//    save_map(data->map_circle, data->outdir + "circle" + data->vertex_count + ".txt");
-//    save_map(data->map_even_gir, data->outdir + "even_gir" + data->vertex_count + ".txt");
-//    save_map(data->map_odd_gir, data->outdir + "odd_gir" + data->vertex_count + ".txt");
+//    save_map(data->result_girth, data->outdir + "girth" + data->vertex_count + ".txt");
+//    save_map(data->result_circle, data->outdir + "circle" + data->vertex_count + ".txt");
+//    save_map(data->result_even_girth, data->outdir + "even_girth" + data->vertex_count + ".txt");
+//    save_map(data->result_odd_girth, data->outdir + "odd_girth" + data->vertex_count + ".txt");
 }
 
 

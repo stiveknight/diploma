@@ -26,10 +26,10 @@ typedef struct data_t {
     vector<int> even_gir;
     vector<int> odd_gir;
 
-    map<int, int> map_gir;
-    map<int, int> map_circle;
-    map<int, int> map_even_gir;
-    map<int, int> map_odd_gir;
+//    map<int, int> map_gir;
+//    map<int, int> map_circle;
+//    map<int, int> map_even_gir;
+//    map<int, int> map_odd_gir;
     map<string, int> result_chnum;
     map<string, int> result_chind;
     map<string, int> result_sv;
@@ -45,6 +45,10 @@ typedef struct data_t {
     map<string, int> result_local_sv;
     map<string, int> result_k_edge_connected;
     map<string, int> result_k_vertex_connected;
+    map<string, int> result_girth;
+    map<string, int> result_circle;
+    map<string, int> result_even_girth;
+    map<string, int> result_odd_girth;
 
 
 

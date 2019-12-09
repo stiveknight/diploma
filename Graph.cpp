@@ -713,3 +713,42 @@ int Graph::k_edge_connected() {
 }
 
 
+vector<int> Graph::girth_and_circle(){
+    int elem_gir, elem_circle, elem_even_gir, elem_odd_gir;
+    set <int> cycles = this->girth();
+    if (cycles.empty()) {
+        elem_gir = -1;
+        elem_circle = -1;
+        elem_even_gir = -1;
+        elem_odd_gir = -1;
+    } else {
+        elem_gir = *(cycles.begin());
+        elem_circle = *(max_element(cycles.begin(), cycles.end()));
+
+        int elem = -1;
+        for (int item: cycles) {
+            if (item % 2 == 0) {
+                elem = item;
+                break;
+            }
+        }
+        elem_even_gir = elem;
+
+        elem = -1;
+        for (int item: cycles) {
+            if (item % 2 == 1) {
+                elem = item;
+                break;
+            }
+        }
+        elem_odd_gir = elem;
+    }
+
+    vector <int> ans;
+    ans.push_back(elem_gir);
+    ans.push_back(elem_circle);
+    ans.push_back(elem_even_gir);
+    ans.push_back(elem_odd_gir);
+
+    return ans;
+}

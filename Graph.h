@@ -37,6 +37,7 @@ public:
     int local_sv();
     int k_edge_connected();
     int k_vertex_connected();
+    vector <int> girth_and_circle();
 
 
 private:
