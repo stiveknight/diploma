@@ -39,6 +39,7 @@ typedef struct data_t {
     map<string, int> result_diam;
     map<string, int> result_duo;
     map<string, int> result_exponent;
+    map<string, int> result_primitive;
     map<string, int> result_clique;
     map<string, int> result_indep;
     map<string, int> result_m;
@@ -49,6 +50,7 @@ typedef struct data_t {
     map<string, int> result_circle;
     map<string, int> result_even_girth;
     map<string, int> result_odd_girth;
+    map<string, int> result_max_d;
 
 
 
