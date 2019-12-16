@@ -19,7 +19,7 @@ void thread_mod(data_t * data) {
     int nthreads = std::thread::hardware_concurrency();
     if(nthreads == 0)
         nthreads = 2;
-    // nthreads = 4;
+    nthreads = 6;
     std::cout << "Count of threads: " << nthreads << std::endl;
     std::vector<std::thread> threads;
     for(int i = 0; i < nthreads; i++) {
@@ -45,13 +45,17 @@ void single_mod(data_t * data) {
     }
     std::string s;
     int line_num = 1;
+    map<int, vector<vector<int>>> cache = cache_color_permutation(stoi(data->vertex_count), stoi(data->vertex_count));
     for (infile >> s; !infile.eof(); infile >> s, line_num++) {
         Graph g(s);
+        g.update_color_cache(&cache);
 
 //        int m = g.m;
 //        int max_d = g.max_d();
         int chnum = g.chromatic_num();
+
         int chind = g.chromatic_ind();
+
 //        int komp_sv = g.komp_sv();
 //        int treo = g.treo();
 //        pair<int,int> rd = g.rad_diam();

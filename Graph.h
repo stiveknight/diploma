@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
     Graph(vector<vector<int>> graph);
 
     vector<vector<int>> graph;
+    map<int, vector<vector<int>>> *color_cache;
     int n, m;
 
 
@@ -39,7 +41,7 @@ public:
     int k_vertex_connected();
     vector <int> girth_and_circle();
 
-
+    void update_color_cache(map<int, vector<vector<int>>> *cache);
 private:
 
 };

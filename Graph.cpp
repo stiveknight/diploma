@@ -98,14 +98,11 @@ void dfs(Graph *g, int v, vector<int> &used, vector<int> &p, set<int> &cycle) { 
 
 
 set<int> Graph::girth() {
-    vector<int> used;
-    vector<int> p;
     int n = int(this->graph.size());
+    vector<int> used(n, 0);
+    vector<int> p(n, -1);
+
     set<int> cycle;
-    for (int i = 0; i < n; i++) {
-        p.push_back(-1);
-        used.push_back(0);
-    }
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -115,7 +112,6 @@ set<int> Graph::girth() {
         dfs(this, i, used, p, cycle);
     }
     return cycle;
-
 }
 
 void dfs_1(vector<vector<int>> &g, int v, vector<int> &used) {
@@ -233,7 +229,6 @@ int Graph::duo() {
     }
     if (ok)
         return 1;
-
     else
         return -1;
 }
@@ -392,76 +387,77 @@ int Graph::max_d(){ // максимальная степень вершины
 }
 
 
-bool dfs_chrom(Graph *g, int v, vector<int> &colors, int value) {
-    for (int c = 0; c < value; c++) {
-        bool tmp = true;
-        for (int i = 0; i < g->graph[v].size(); i++) {
-            if (g->graph[v][i] == 1)
-                if (colors[i] == c) {
-                    tmp = false;
-                    break;
-                }
-        }
-        if (!tmp)
-            continue;
-
-        colors[v] = c;
-
-        for (int item: colors)
-            if (item == -1)
-                return true;
-
-        for (int i = 0; i < g->graph[v].size(); i++) {
-            if (g->graph[v][i] == 1)
-                if (colors[i] == -1) {
-                    if (dfs_chrom(g, i, colors, value))
-                        return true;
-                }
-        }
-        colors[v] = -1;
+bool dfs_chrom(Graph *g, int v, vector<int> &used, vector<int> &colors, vector<int> &comp) {
+    int n = int(colors.size());
+    used[v] = true;
+    // look around
+    for (int u = 0; u < n; u++) {
+        if (colors[v] == colors[u] && comp[v] == comp[u] && g->graph[v][u] == 1)
+            return false;
     }
-    return false;
+    for (int u = 0; u < n; u++) {
+        if (!used[u] && comp[v] == comp[u] && g->graph[v][u] == 1) {
+            if (!dfs_chrom(g, u, used, colors, comp))
+                return false;
+        }
+    }
+    return true;
 }
 
 
+void dfs_comp(Graph *graph, int v, vector<int> &used, int color) {
+    used[v] = color;
+    for (int u = 0; u < graph->n; u++) {
+        if (graph->graph[v][u] == 1 && used[u] == 0) {
+            dfs_comp(graph, u, used, color);
+        }
+    }
+}
 
-int Graph::chromatic_num(){
+
+int Graph::chromatic_num() {
+
     int n = this->n;
     int m = this->m;
 
-    if (m == n*(n-1)/2)
+    if (m == n * (n - 1) / 2)
         return n;
+
+    if (m == 0)
+        return 1;
 
     if (this->duo() == 1)
         return 2;
 
-
-    set<int> cycles = this->girth();
-    bool tmp = true;
-    for (int item: cycles){
-        if (item % 2 == 1)
-            tmp = false;
-    }
-    if (tmp){
-        return 2;
-    }
-
     int inf = this->clique();
-
     int sup = 1 + this->max_d();
 
-
-
+    vector<int> comp(n);
+    for (int i = 0; i < n; i++) {
+        if (comp[i] == 0) {
+            dfs_comp(this, i, comp, i + 1);
+        }
+    }
     for (int value = inf; value <= sup; value++) {
-        vector<int> colors(n, -1);
-        bool res;
-        for (int i = 0; i < n; i++) {
-            res = dfs_chrom(this, i, colors, value);
+        vector<vector<int>> &colors = (*this->color_cache)[value];
+        // cout << colors.size() << endl;
+        bool res = false;
+        for (auto &color : colors) {
+            vector<int> used(n);
+            for (int i = 0; i < n; i++) {
+                if (used[i] == 1)
+                    continue;
+                for (int item = 0; item < used.size(); item++)
+                    if (comp[item] == comp[i])
+                        used[item] = 1;
+                vector<int> syka(n);
+                res = dfs_chrom(this, i, syka, color, comp);
+                if (!res)
+                    break;
+            }
             if (res)
                 break;
-
         }
-
         if (res)
             return value;
     }
@@ -470,7 +466,7 @@ int Graph::chromatic_num(){
 
 
 
-int get_available_color(vector<vector<int> > &used, int u, int v, int max_color) {
+int get_available_edge_color(vector<vector<int> > &used, int u, int v, int max_color) {
     int n = int(used.size());
     for (int c = 1; c < max_color+1; c++) {
         bool bad_color = false;
@@ -523,7 +519,7 @@ bool dfs(int u, vector<vector<int> > &used, int max_color) {
 
     for (int v = 0; v < n; v++) {
         if (used[u][v] == 0) {
-            int color = get_available_color(used, u, v, max_color);
+            int color = get_available_edge_color(used, u, v, max_color);
             if (color == -1)
                 return false;
 
@@ -751,4 +747,8 @@ vector<int> Graph::girth_and_circle(){
     ans.push_back(elem_odd_gir);
 
     return ans;
+}
+
+void Graph::update_color_cache(map<int, vector<vector<int>>> *cache) {
+    this->color_cache = cache;
 }
