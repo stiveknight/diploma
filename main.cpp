@@ -56,6 +56,12 @@ void single_mod(data_t * data) {
 
         int chind = g.chromatic_ind();
 
+
+//        int m = g.m;
+//        int max_d = g.max_d();
+//        int chnum = g.chromatic_num();
+//        int chind = g.chromatic_ind();
+
 //        int komp_sv = g.komp_sv();
 //        int treo = g.treo();
 //        pair<int,int> rd = g.rad_diam();
@@ -77,8 +83,9 @@ void single_mod(data_t * data) {
 //        cout << k_e_con << endl;
 
         data->result_chnum[s] = chnum;
+
         data->result_chind[s] = chind;
-////
+//        data->result_chind[s] = chind;
 //
 //        data->result_komp_sv[s] = komp_sv;
 //        if (komp_sv == 1)
@@ -170,7 +177,9 @@ void run(data_t * data) {
             break;
     }
 
+
     dump_state(data);
+
 }
 
 

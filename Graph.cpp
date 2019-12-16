@@ -386,6 +386,17 @@ int Graph::max_d(){ // максимальная степень вершины
     return ans;
 }
 
+void dfs_color(vector<vector<int>> &g, int v, vector<int> &used, int color) {
+    used[v] = color;
+    for (int i = 0; i < g.size(); i++) {
+        if (g[v][i] == 1) {
+            int to = i;
+            if (used[to] == 0)
+                dfs_color(g, to, used, color);
+        }
+    }
+}
+
 
 bool dfs_chrom(Graph *g, int v, vector<int> &used, vector<int> &colors, vector<int> &comp) {
     int n = int(colors.size());
@@ -429,8 +440,12 @@ int Graph::chromatic_num() {
     if (this->duo() == 1)
         return 2;
 
+
+
+
     int inf = this->clique();
     int sup = 1 + this->max_d();
+
 
     vector<int> comp(n);
     for (int i = 0; i < n; i++) {
