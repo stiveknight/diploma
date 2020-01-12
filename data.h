@@ -25,7 +25,7 @@ typedef struct data_t {
     vector<int> circle;
     vector<int> even_gir;
     vector<int> odd_gir;
-
+//
 //    map<int, int> map_gir;
 //    map<int, int> map_circle;
 //    map<int, int> map_even_gir;

@@ -1,7 +1,3 @@
-//
-// Created by Mike on 16.02.2019.
-//
-
 #ifndef NIR_TASK_QUEUE_H
 #define NIR_TASK_QUEUE_H
 

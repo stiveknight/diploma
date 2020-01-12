@@ -1,10 +1,5 @@
-//
-// Created by OKB on 13.05.2019.
-//
-
 #ifndef NIR_MTHREAD_H
 #define NIR_MTHREAD_H
-
 
 #include "data.h"
 #include "context.h"
@@ -45,17 +40,17 @@ map<int, vector<vector<int>>> cache_color_permutation(int n, int max_color) {
 
 void consumer(data_t * data, int num) {
     map<string, int> result_chnum;
-    // map<string, int> result_chind;
-//    map<string, int> result_girth;
-//    map<string, int> result_circle;
-//    map<string, int> result_even_girth;
-//    map<string, int> result_odd_girth;
-    string filename1 = data->outdir + "chromatic_num" + data->vertex_count + "_3.txt";
-//    string filename2 = data->outdir + "chromatic_ind" + data->vertex_count + "_3.txt";
-//    string filename3 = data->outdir + "girth" + data->vertex_count + "_3.txt";
-//    string filename4 = data->outdir + "circle" + data->vertex_count + "_3.txt";
-//    string filename5 = data->outdir + "even_girth" + data->vertex_count + "_3.txt";
-//    string filename6 = data->outdir + "odd_girth" + data->vertex_count + "_3.txt";
+     map<string, int> result_chind;
+    map<string, int> result_girth;
+    map<string, int> result_circle;
+    map<string, int> result_even_girth;
+    map<string, int> result_odd_girth;
+    string filename1 = data->outdir + "chromatic_num" + data->vertex_count + ".txt";
+    string filename2 = data->outdir + "chromatic_ind" + data->vertex_count + ".txt";
+    string filename3 = data->outdir + "girth" + data->vertex_count + ".txt";
+    string filename4 = data->outdir + "circle" + data->vertex_count + ".txt";
+    string filename5 = data->outdir + "even_girth" + data->vertex_count + ".txt";
+    string filename6 = data->outdir + "odd_girth" + data->vertex_count + ".txt";
     map<int, vector<vector<int>>> cache = cache_color_permutation(stoi(data->vertex_count), stoi(data->vertex_count));
     for (int i = 1;; i++) {
         task_t task;
@@ -66,51 +61,48 @@ void consumer(data_t * data, int num) {
         Graph graph(s);
         graph.update_color_cache(&cache);
         int chnum = graph.chromatic_num();
-//        int chind = graph.chromatic_ind();
-        //        int komp_sv = g.komp_sv();
-        //        int treo = g.treo();
-        //        pair<int,int> rd = g.rad_diam();
-        //        int duo = g.duo();
-        //        int exponent = g.exponent();
-        //        int clique = g.clique();
-        //        int indep = g.indep();
-        //        int local_sv = g.local_sv();
-        //        int k_e_con = g.k_edge_connected();
-        //        int k_v_con = g.k_vertex_connected();
-//                vector<int> g_and_c = graph.girth_and_circle();
-//                int girth = g_and_c[0];
-//                int circle = g_and_c[1];
-//                int even_girth = g_and_c[2];
-//                int odd_girth = g_and_c[3];
+        int chind = graph.chromatic_ind();
+        int komp_sv = graph.komp_sv();
+        int treo = graph.treo();
+        pair<int,int> rd = graph.rad_diam();
+        int duo = graph.duo();
+        int exponent = graph.exponent();
+        int clique = graph.clique();
+        int indep = graph.indep();
+        int local_sv = graph.local_sv();
+        int k_e_con = graph.k_edge_connected();
+        int k_v_con = graph.k_vertex_connected();
+        vector<int> g_and_c = graph.girth_and_circle();
+        int girth = g_and_c[0];
+        int circle = g_and_c[1];
+        int even_girth = g_and_c[2];
+        int odd_girth = g_and_c[3];
 
-
-
-        //        cout << k_e_con << endl;
 
         result_chnum[s] = chnum;
-//        result_chind[s] = chind;
-        //
-        //
-        //        data->result_komp_sv[s] = komp_sv;
-        //        if (komp_sv == 1)
-        //            data->result_sv[s] = 1;
-        //        else
-        //            data->result_sv[s] = 0;
-        //        data->result_treo[s] = treo;
-        //        data->result_rad[s] = rd.first;
-        //        data->result_diam[s] = rd.second;
-        //        data->result_duo[s] = duo;
-        //        data->result_exponent[s] = exponent;
-        //        data->result_clique[s] = clique;
-        //        data->result_indep[s] = indep;
-        //        data->result_m[s] = m;
-        //        data->result_local_sv[s] = local_sv;
-        //        data->result_k_edge_connected[s] = k_e_con;
-        //        data->result_k_vertex_connected[s] = k_v_con;
-//                result_girth[s] = girth;
-//                result_circle[s] = circle;
-//                result_even_girth[s] = even_girth;
-//                result_odd_girth[s] = odd_girth;
+        result_chind[s] = chind;
+
+
+        data->result_komp_sv[s] = komp_sv;
+        if (komp_sv == 1)
+            data->result_sv[s] = 1;
+        else
+            data->result_sv[s] = 0;
+        data->result_treo[s] = treo;
+        data->result_rad[s] = rd.first;
+        data->result_diam[s] = rd.second;
+        data->result_duo[s] = duo;
+        data->result_exponent[s] = exponent;
+        data->result_clique[s] = clique;
+        data->result_indep[s] = indep;
+//        data->result_m[s] = m;
+        data->result_local_sv[s] = local_sv;
+        data->result_k_edge_connected[s] = k_e_con;
+        data->result_k_vertex_connected[s] = k_v_con;
+        result_girth[s] = girth;
+        result_circle[s] = circle;
+        result_even_girth[s] = even_girth;
+        result_odd_girth[s] = odd_girth;
         if (i % 10000 == 0) {
             // Here we dump a peace of result and drop maps for next calculations.
             std::lock_guard<std::mutex> lock(data->queue.cnt_elem_lock);

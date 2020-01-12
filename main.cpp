@@ -50,115 +50,56 @@ void single_mod(data_t * data) {
         Graph g(s);
         g.update_color_cache(&cache);
 
-//        int m = g.m;
-//        int max_d = g.max_d();
+        int m = g.m;
+        int max_d = g.max_d();
         int chnum = g.chromatic_num();
-
         int chind = g.chromatic_ind();
-
-
-//        int m = g.m;
-//        int max_d = g.max_d();
-//        int chnum = g.chromatic_num();
-//        int chind = g.chromatic_ind();
-
-//        int komp_sv = g.komp_sv();
-//        int treo = g.treo();
-//        pair<int,int> rd = g.rad_diam();
-//        int duo = g.duo();
-//        int exponent = g.exponent();
-//        int clique = g.clique();
-//        int indep = g.indep();
-//        int local_sv = g.local_sv();
-//        int k_e_con = g.k_edge_connected();
-//        int k_v_con = g.k_vertex_connected();
-//        vector<int> g_and_c = g.girth_and_circle();
-//        int girth = g_and_c[0];
-//        int circle = g_and_c[1];
-//        int even_girth = g_and_c[2];
-//        int odd_girth = g_and_c[3];
-
-
-
-//        cout << k_e_con << endl;
+        int komp_sv = g.komp_sv();
+        int treo = g.treo();
+        pair<int,int> rd = g.rad_diam();
+        int duo = g.duo();
+        int exponent = g.exponent();
+        int clique = g.clique();
+        int indep = g.indep();
+        int local_sv = g.local_sv();
+        int k_e_con = g.k_edge_connected();
+        int k_v_con = g.k_vertex_connected();
+        vector<int> g_and_c = g.girth_and_circle();
+        int girth = g_and_c[0];
+        int circle = g_and_c[1];
+        int even_girth = g_and_c[2];
+        int odd_girth = g_and_c[3];
 
         data->result_chnum[s] = chnum;
-
         data->result_chind[s] = chind;
-//        data->result_chind[s] = chind;
-//
-//        data->result_komp_sv[s] = komp_sv;
-//        if (komp_sv == 1)
-//            data->result_sv[s] = 1;
-//        else
-//            data->result_sv[s] = 0;
-//        data->result_treo[s] = treo;
-//        data->result_rad[s] = rd.first;
-//        data->result_diam[s] = rd.second;
-//        data->result_duo[s] = duo;
-//        data->result_exponent[s] = exponent;
-//        if (exponent == 0)
-//            data->result_primitive[s] = 0;
-//        else
-//            data->result_primitive[s] = 1;
-
-//        data->result_clique[s] = clique;
-//        data->result_indep[s] = indep;
-//        data->result_m[s] = m;
-//        data->result_max_d[s] = max_d;
-
-//        data->result_local_sv[s] = local_sv;
-//        data->result_k_edge_connected[s] = k_e_con;
-//        data->result_k_vertex_connected[s] = k_v_con;
-//        data->result_girth[s] = girth;
-//        data->result_circle[s] = circle;
-//        data->result_even_girth[s] = even_girth;
-//        data->result_odd_girth[s] = odd_girth;
-
-//        int chnum = g.chromatic_num();
-//        int chind = g.chromatic_ind();
-        //        int komp_sv = g.komp_sv();
-        //        int treo = g.treo();
-        //        pair<int,int> rd = g.rad_diam();
-        //        int duo = g.duo();
-        //        int exponent = g.exponent();
-        //        int clique = g.clique();
-        //        int indep = g.indep();
-        //        int local_sv = g.local_sv();
-        //        int k_e_con = g.k_edge_connected();
-        //        int k_v_con = g.k_vertex_connected();
-        //        vector<int> g_and_c = g.girth_and_circle();
-        //        int girth = g_and_c[0];
-        //        int circle = g_and_c[1];
-        //        int even_girth = g_and_c[2];
-        //        int odd_girth = g_and_c[3];
+        data->result_chind[s] = chind;
+        data->result_komp_sv[s] = komp_sv;
+        if (komp_sv == 1)
+            data->result_sv[s] = 1;
+        else
+            data->result_sv[s] = 0;
+        data->result_treo[s] = treo;
+        data->result_rad[s] = rd.first;
+        data->result_diam[s] = rd.second;
+        data->result_duo[s] = duo;
+        data->result_exponent[s] = exponent;
+        if (exponent == 0)
+            data->result_primitive[s] = 0;
+        else
+            data->result_primitive[s] = 1;
+        data->result_clique[s] = clique;
+        data->result_indep[s] = indep;
+        data->result_m[s] = m;
+        data->result_max_d[s] = max_d;
+        data->result_local_sv[s] = local_sv;
+        data->result_k_edge_connected[s] = k_e_con;
+        data->result_k_vertex_connected[s] = k_v_con;
+        data->result_girth[s] = girth;
+        data->result_circle[s] = circle;
+        data->result_even_girth[s] = even_girth;
+        data->result_odd_girth[s] = odd_girth;
 
 
-
-        //        cout << k_e_con << endl;
-
-        //
-        //
-        //        data->result_komp_sv[s] = komp_sv;
-        //        if (komp_sv == 1)
-        //            data->result_sv[s] = 1;
-        //        else
-        //            data->result_sv[s] = 0;
-        //        data->result_treo[s] = treo;
-        //        data->result_rad[s] = rd.first;
-        //        data->result_diam[s] = rd.second;
-        //        data->result_duo[s] = duo;
-        //        data->result_exponent[s] = exponent;
-        //        data->result_clique[s] = clique;
-        //        data->result_indep[s] = indep;
-        //        data->result_m[s] = m;
-        //        data->result_local_sv[s] = local_sv;
-        //        data->result_k_edge_connected[s] = k_e_con;
-        //        data->result_k_vertex_connected[s] = k_v_con;
-        //        data->result_girth[s] = girth;
-        //        data->result_circle[s] = circle;
-        //        data->result_even_girth[s] = even_girth;
-        //        data->result_odd_girth[s] = odd_girth;
         if (line_num % 10000 == 0) {
             cout << "Line: " << line_num << " Current graph: " << s << endl;
             dump_state(data);
@@ -177,9 +118,7 @@ void run(data_t * data) {
             break;
     }
 
-
     dump_state(data);
-
 }
 
 

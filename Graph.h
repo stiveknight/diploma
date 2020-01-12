@@ -1,7 +1,3 @@
-//
-// Created by user on 13.04.2019.
-//
-
 #ifndef NIR_GRAPH_H
 #define NIR_GRAPH_H
 
